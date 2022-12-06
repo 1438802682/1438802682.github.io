@@ -1,0 +1,486 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C++运算符重载之加号运算符重载 | CtrlCherry</title><meta name="keywords" content="CPP"><meta name="author" content="CtrlX"><meta name="copyright" content="CtrlX"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="加号运算符重载作用：实现两个自定义数据类型相加的运算 1.成员函数实现 + 号运算符重载 12345678910111213141516171819202122232425262728293031323334353637383940414243class Person &amp;#123;public:	Person() &amp;#123;&amp;#125;;	Person(int a, int b)	&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++运算符重载之加号运算符重载">
+<meta property="og:url" content="http://ctrlx.life/post/21c70a52.html">
+<meta property="og:site_name" content="CtrlCherry">
+<meta property="og:description" content="加号运算符重载作用：实现两个自定义数据类型相加的运算 1.成员函数实现 + 号运算符重载 12345678910111213141516171819202122232425262728293031323334353637383940414243class Person &amp;#123;public:	Person() &amp;#123;&amp;#125;;	Person(int a, int b)	&amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy10.5vhnaiba2yw0.webp">
+<meta property="article:published_time" content="2022-08-09T01:09:32.000Z">
+<meta property="article:modified_time" content="2022-08-09T01:13:07.482Z">
+<meta property="article:author" content="CtrlX">
+<meta property="article:tag" content="CPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy10.5vhnaiba2yw0.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://ctrlx.life/post/21c70a52"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/pwa/16.png"/><link rel="mask-icon" href="/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++运算符重载之加号运算符重载',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-09 09:13:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper/swiper/swiper.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper/swiper/swiperstyle.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/css/main.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">105</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/%E5%90%88%E9%9B%86/"><i class="fa-fw fa-solid fa-floppy-disk"></i><span> compilation</span></a></li><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-images"></i><span> Picture</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fa-solid fa-ghost"></i><span> Game</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa-solid fa-book-journal-whills"></i><span> Book</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy10.5vhnaiba2yw0.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">CtrlCherry</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/%E5%90%88%E9%9B%86/"><i class="fa-fw fa-solid fa-floppy-disk"></i><span> compilation</span></a></li><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-images"></i><span> Picture</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fa-solid fa-ghost"></i><span> Game</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa-solid fa-book-journal-whills"></i><span> Book</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++运算符重载之加号运算符重载</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-09T01:09:32.000Z" title="发表于 2022-08-09 09:09:32">2022-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-09T01:13:07.482Z" title="更新于 2022-08-09 09:13:07">2022-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/">Programming</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/CPP/">CPP</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">568</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++运算符重载之加号运算符重载"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="加号运算符重载"><a href="#加号运算符重载" class="headerlink" title="加号运算符重载"></a>加号运算符重载</h4><p>作用：实现两个自定义数据类型相加的运算</p>
+<p><strong>1.成员函数实现 + 号运算符重载</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Person</span>() &#123;&#125;;</span><br><span class="line">	<span class="built_in">Person</span>(<span class="type">int</span> a, <span class="type">int</span> b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_A = a;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_B = b;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//1.成员函数实现 + 号运算符重载</span></span><br><span class="line">	Person <span class="keyword">operator</span>+(<span class="type">const</span> Person&amp; p) &#123;</span><br><span class="line">		Person temp;</span><br><span class="line">		temp.m_A = <span class="keyword">this</span>-&gt;m_A + p.m_A;</span><br><span class="line">		temp.m_B = <span class="keyword">this</span>-&gt;m_B + p.m_B;</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> m_A;</span><br><span class="line">	<span class="type">int</span> m_B;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function">Person <span class="title">p1</span><span class="params">(<span class="number">10</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">Person <span class="title">p2</span><span class="params">(<span class="number">20</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//1.成员函数方式</span></span><br><span class="line">	Person p3 = p2 + p1;  <span class="comment">//相当于 p2.operaor+(p1)</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;mA:&quot;</span> &lt;&lt; p3.m_A &lt;&lt; <span class="string">&quot; mB:&quot;</span> &lt;&lt; p3.m_B &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">test</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.全局函数实现 + 号运算符重载</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Person</span>() &#123;&#125;;</span><br><span class="line">	<span class="built_in">Person</span>(<span class="type">int</span> a, <span class="type">int</span> b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_A = a;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_B = b;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> m_A;</span><br><span class="line">	<span class="type">int</span> m_B;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//2.全局函数实现 + 号运算符重载</span></span><br><span class="line">Person <span class="keyword">operator</span>+(<span class="type">const</span> Person&amp; p1, <span class="type">const</span> Person&amp; p2) &#123;</span><br><span class="line">	Person temp;</span><br><span class="line">	temp.m_A = p1.m_A + p2.m_A;</span><br><span class="line">	temp.m_B = p1.m_B + p2.m_B;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function">Person <span class="title">p1</span><span class="params">(<span class="number">10</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">Person <span class="title">p2</span><span class="params">(<span class="number">20</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.全局函数方式</span></span><br><span class="line">    Person p3 = p2 + p1;  <span class="comment">//相当于 operaor+(p1,p2)</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;mA:&quot;</span> &lt;&lt; p3.m_A &lt;&lt; <span class="string">&quot; mB:&quot;</span> &lt;&lt; p3.m_B &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">test</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.运算符重载 可以发生函数重载</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Person</span>() &#123;&#125;;</span><br><span class="line">	<span class="built_in">Person</span>(<span class="type">int</span> a, <span class="type">int</span> b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_A = a;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_B = b;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> m_A;</span><br><span class="line">	<span class="type">int</span> m_B;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.运算符重载 可以发生函数重载 </span></span><br><span class="line">Person <span class="keyword">operator</span>+(<span class="type">const</span> Person&amp; p2, <span class="type">int</span> val)  <span class="comment">//注意全局函数的运算重载的函数名是编译器给的。</span></span><br><span class="line">&#123;</span><br><span class="line">	Person temp;</span><br><span class="line">	temp.m_A = p2.m_A + val;</span><br><span class="line">	temp.m_B = p2.m_B + val;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function">Person <span class="title">p1</span><span class="params">(<span class="number">10</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">Person <span class="title">p2</span><span class="params">(<span class="number">20</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//3.运算符重载也可以发生函数重载，如下person + int</span></span><br><span class="line">	Person p4 = p3 + <span class="number">10</span>; <span class="comment">//相当于 operator+(p3,10)</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;mA:&quot;</span> &lt;&lt; p4.m_A &lt;&lt; <span class="string">&quot; mB:&quot;</span> &lt;&lt; p4.m_B &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">test</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>总结1：对于内置的数据类型的表达式的的运算符是不可能改变的，即1+1&#x3D;2不可变，不会为3.</p>
+</blockquote>
+<blockquote>
+<p>总结2：不要滥用运算符重载，即你写的函数名是加法，可是函数的实现是减法，可以运行但是这叫滥用。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://ctrlx.life">CtrlX</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://ctrlx.life/post/21c70a52.html">http://ctrlx.life/post/21c70a52.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ctrlx.life" target="_blank">CtrlCherry</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CPP/">CPP</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy10.5vhnaiba2yw0.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付寶"/></a><div class="post-qr-code-desc">支付寶</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/afda3148.html"><img class="prev-cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy1.eurvki3iut4.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++面向对象友元，全局函数、类、成员函数做友元</div></div></a></div><div class="next-post pull-right"><a href="/post/616b8959.html"><img class="next-cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy9.3luzlh30qae0.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++运算符重载（二）之左移运算符重载</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/48bdaf25.html" title="C&#x2F;CPP基础知识练习题及分析"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy17.h3bfzw39nww.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-20</div><div class="title">C&#x2F;CPP基础知识练习题及分析</div></div></a></div><div><a href="/post/bee4b2c2.html" title="C&#x2F;CPP每日一题：字符串"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy9.3luzlh30qae0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-23</div><div class="title">C&#x2F;CPP每日一题：字符串</div></div></a></div><div><a href="/post/ce3b24b0.html" title="C&#x2F;CPP每日一题：Playing with digits"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy9.3luzlh30qae0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-24</div><div class="title">C&#x2F;CPP每日一题：Playing with digits</div></div></a></div><div><a href="/post/ce90d395.html" title="C&#x2F;CPP基础PTA习题及分析"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1uj92a8f4nvk.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-03</div><div class="title">C&#x2F;CPP基础PTA习题及分析</div></div></a></div><div><a href="/post/78ae65ae.html" title="C++提高编程笔记合集"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy8.53nku5qlm5o0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-04</div><div class="title">C++提高编程笔记合集</div></div></a></div><div><a href="/post/570b279e.html" title="C++STL初识，概念、六大组件、容器算法迭代器"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy4.1734b95b6p6k.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-30</div><div class="title">C++STL初识，概念、六大组件、容器算法迭代器</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">CtrlX</div><div class="author-info__description">Inevitable、Optional</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">105</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://code.ctrlx.life/"><i class="fa-solid fa-code"></i><span>Code index</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-45-30-782_com.3xz33a701f40.webp" target="_blank" title=""><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-46-06-610_com.641chq4g7ps0.webp" target="_blank" title=""><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-39-29-222_com.5q7wnairykc0.webp" target="_blank" title=""><i class="fa-brands fa-instagram"></i></a><a class="social-icon" href="https://steamcommunity.com/profiles/76561199113999370/" target="_blank" title=""><i class="fa-brands fa-steam"></i></a><a class="social-icon" href="https://twitter.com/GitCtrlX?t=h1TjUUcsWmdL0EnxVaALxg&amp;s=09" target="_blank" title=""><i class="fa-brands fa-twitter"></i></a><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-52-36-955_org.4e0vey1njrm0.webp" target="_blank" title=""><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">18：00-次日6：00开启夜间模式 <p align="center">为何中意我这种无赖，是话你太蠢还是太伟大</p></div></div><div class="xpand" style="height:10px;"></div><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget"><div class="item-headline"><i class="fa-solid fa-broom-ball"></i><span>这是个牌子</span></div><div class="item-content"><marquee><b>People who can't give up nothing can't change anything.</b></marquee></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="toc-number">1.</span> <span class="toc-text">加号运算符重载</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/297a89d9.html" title="Python学习笔记"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1ieyh98xguio.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python学习笔记"/></a><div class="content"><a class="title" href="/post/297a89d9.html" title="Python学习笔记">Python学习笔记</a><time datetime="2022-12-06T02:57:13.000Z" title="发表于 2022-12-06 10:57:13">2022-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/74a5716f.html" title="计算机网络笔记合集"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.426faxi87uw0.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络笔记合集"/></a><div class="content"><a class="title" href="/post/74a5716f.html" title="计算机网络笔记合集">计算机网络笔记合集</a><time datetime="2022-12-04T02:57:57.000Z" title="发表于 2022-12-04 10:57:57">2022-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/17aafb82.html" title="Java与CPP的部分语法对比"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2o9njislmhw0.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java与CPP的部分语法对比"/></a><div class="content"><a class="title" href="/post/17aafb82.html" title="Java与CPP的部分语法对比">Java与CPP的部分语法对比</a><time datetime="2022-11-28T09:43:59.000Z" title="发表于 2022-11-28 17:43:59">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/81d713b6.html" title="Java/C++强制类型转化 | 自增自减运算符 对比"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.25awkajrwnxc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java/C++强制类型转化 | 自增自减运算符 对比"/></a><div class="content"><a class="title" href="/post/81d713b6.html" title="Java/C++强制类型转化 | 自增自减运算符 对比">Java/C++强制类型转化 | 自增自减运算符 对比</a><time datetime="2022-11-27T08:02:27.000Z" title="发表于 2022-11-27 16:02:27">2022-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a9b5bacb.html" title="Git-diff用法总结"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.l9rr5rs8l40.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git-diff用法总结"/></a><div class="content"><a class="title" href="/post/a9b5bacb.html" title="Git-diff用法总结">Git-diff用法总结</a><time datetime="2022-11-23T09:45:01.000Z" title="发表于 2022-11-23 17:45:01">2022-11-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy10.5vhnaiba2yw0.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By CtrlX</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.ctrlx.life',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.ctrlx.life',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.ctrlx.life',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="5183531430" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="255,192,203" opacity="0.9" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="//code.tidio.co/nwxefknyxvcions2yjh87dvfbm4i2qza.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Programming/CPP/DQuestion/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 Daily Code<br>(3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Programming/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 Programming<br>(81)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Programming/CPP/Project/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 CPP Project<br>(11)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Algorithm/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐱‍👓 Algorithm<br>(5)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="http://ctrlx.life/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(25% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style> <script data-pjax>if(document.getElementById('recent-posts') && location.pathname =='/'){
+    
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-07-30</span><a class="blog-slider__title" href="post/7af7302a.html">关于解决Hexo上传时出现errorSpawn错误的详细说明</a><div class="blog-slider__text">暴力解决errorSpawn！</div><a class="blog-slider__button" href="post/7af7302a.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.426faxi87uw0.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.426faxi87uw0.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-09-25</span><a class="blog-slider__title" href="post/f254dc1d.html">C/CPP 指针变量 | 数组指针 | 指针数组 | 野指针 | 空指针</a><div class="blog-slider__text">C语言指针问题！</div><a class="blog-slider__button" href="post/f254dc1d.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.65267p6y15c0.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.65267p6y15c0.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-10-01</span><a class="blog-slider__title" href="post/c9703b4.html">C/CPP数组的深入理解 | 指针与数组 | 一二三维数组</a><div class="blog-slider__text">二维数组的行地址、列地址，与元素的存储详细分析！</div><a class="blog-slider__button" href="post/c9703b4.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1uj92a8f4nvk.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1uj92a8f4nvk.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-10-01</span><a class="blog-slider__title" href="post/107469e8.html">C/CPP结构中的字符数组和字符指针</a><div class="blog-slider__text">char[] 与 char*！</div><a class="blog-slider__button" href="post/107469e8.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2ejm4a942h7o.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2ejm4a942h7o.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-07-31</span><a class="blog-slider__title" href="post/3613e636.html">C++内存分区模型分析与实例以及扩展</a><div class="blog-slider__text">C++ 内存分区知识！</div><a class="blog-slider__button" href="post/3613e636.html">详情</a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载swiper')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script>
+<script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper/swiper/swiper.min.js"></script>
+<script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper@0.18/swiper/swiperindex.js"></script>
+<style></style>
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://gitcalendar.zfe.space/api?1438802682";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="1438802682";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><script data-pjax>function history_calendar_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-history"><div class="card-content"><div class="item-headline"><i class="fas fa-clock fa-spin"></i><span>那年今日</span></div><div id="history-baidu" style="height: 100px;overflow: hidden"><div class="history_swiper-container" id="history-container" style="width: 100%;height: 100%"><div class="swiper-wrapper" id="history_container_wrapper" style="height:20px"></div></div></div></div>';
+                console.log('已挂载history_calendar')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='/'|| '/' ==='all')){
+
+            history_calendar_injector_config()
+        } </script><script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/js/main.js"></script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

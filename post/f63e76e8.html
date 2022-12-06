@@ -1,0 +1,703 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C/CPP输入输出函数汇总分析 | CtrlCherry</title><meta name="keywords" content="C"><meta name="author" content="CtrlX"><meta name="copyright" content="CtrlX"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C语言常用标准I&#x2F;O函数scanf,printf,getc,putc,getchar,putchar,gets,puts,fgets,fputs,fgetc,fputc,fscanf,fprintf等. scanf()int scanf(const char *format, arg_list) scanf主要从标准输入流中获取参数值,format为指定的参数格式及参数类型,如scanf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;CPP输入输出函数汇总分析">
+<meta property="og:url" content="http://ctrlx.life/post/f63e76e8.html">
+<meta property="og:site_name" content="CtrlCherry">
+<meta property="og:description" content="C语言常用标准I&#x2F;O函数scanf,printf,getc,putc,getchar,putchar,gets,puts,fgets,fputs,fgetc,fputc,fscanf,fprintf等. scanf()int scanf(const char *format, arg_list) scanf主要从标准输入流中获取参数值,format为指定的参数格式及参数类型,如scanf">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp">
+<meta property="article:published_time" content="2022-11-01T12:39:53.000Z">
+<meta property="article:modified_time" content="2022-11-02T00:22:03.037Z">
+<meta property="article:author" content="CtrlX">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://ctrlx.life/post/f63e76e8"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/pwa/16.png"/><link rel="mask-icon" href="/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C/CPP输入输出函数汇总分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-02 08:22:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper/swiper/swiper.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper/swiper/swiperstyle.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/css/main.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">105</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/%E5%90%88%E9%9B%86/"><i class="fa-fw fa-solid fa-floppy-disk"></i><span> compilation</span></a></li><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-images"></i><span> Picture</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fa-solid fa-ghost"></i><span> Game</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa-solid fa-book-journal-whills"></i><span> Book</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">CtrlCherry</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/%E5%90%88%E9%9B%86/"><i class="fa-fw fa-solid fa-floppy-disk"></i><span> compilation</span></a></li><li><a class="site-page child" href="/picture/"><i class="fa-fw fas fa-images"></i><span> Picture</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fa-solid fa-ghost"></i><span> Game</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa-solid fa-book-journal-whills"></i><span> Book</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C/CPP输入输出函数汇总分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-01T12:39:53.000Z" title="发表于 2022-11-01 20:39:53">2022-11-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-02T00:22:03.037Z" title="更新于 2022-11-02 08:22:03">2022-11-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/">Programming</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/C/">C</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C/CPP输入输出函数汇总分析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="C语言常用标准I-x2F-O函数"><a href="#C语言常用标准I-x2F-O函数" class="headerlink" title="C语言常用标准I&#x2F;O函数"></a>C语言常用标准I&#x2F;O函数</h1><p><code>scanf,printf,getc,putc,getchar,putchar,gets,puts,fgets,fputs,fgetc,fputc,fscanf,fprintf等.</code></p>
+<h2 id="scanf"><a href="#scanf" class="headerlink" title="scanf()"></a>scanf()</h2><p><code>int scanf(const char *format, arg_list)</code></p>
+<p>scanf主要从标准输入流中获取参数值,<strong>format为指定的参数格式及参数类型</strong>,如scanf(“%s,%d”,str,icount);<br>它要求在标准输入流中输入类似”son of bitch,1000”这样的字符串,同时程序会将”son of bitch”给str,1000给icount.<br>scanf函数的返回值为int值,即成功赋值的个数,在上例中如果函数调用成功,则会返回2,所以我们在写程序时,可以通过<br>语句<code>if(scanf(&quot;%s,%d&quot;,str,icount) != 2)&#123;...&#125;</code>来判断用户输入是否正确.</p>
+<h2 id="printf"><a href="#printf" class="headerlink" title="printf()"></a>printf()</h2><p><code>int printf(const char *format, arg_list)</code></p>
+<p>printf主要是将格式化字符串输出到标准输出流中,在stdio.h头文件中定义了标准的输入和输出,分别是stdin,stdout.<br>arg_list可以是变量名,也可以是表达式,但最终都会以值的形式填充进format中.</p>
+<h2 id="getc"><a href="#getc" class="headerlink" title="getc()"></a>getc()</h2><p><code>int getc(FILE *fp)</code></p>
+<p>getc主要是从文件中读出一个字符.常用的判断文件是否读取结束的语句为:(ch &#x3D; getc(fp)) !&#x3D; EOF.EOF为文件结束标志,<br>定义在stdio.h中,就像EXIT_SUCCESS,EXIT_FAILURE定义在stdlib.h中一样,文件也可以被理解为一种流,所以当fp为stdin<br>时,getc(stdin)就等同于getchar()了.</p>
+<h2 id="putc"><a href="#putc" class="headerlink" title="putc()"></a>putc()</h2><p><code>int putc(int ch,FILE *fp)</code></p>
+<p>putc主要是把字符ch写到文件fp中去.如果fp为stdout,则putc就等同于putchar()了.</p>
+<h2 id="getchar"><a href="#getchar" class="headerlink" title="getchar()"></a>getchar()</h2><p><code>int getchar(void)</code></p>
+<p>getchar主要是从标准输入流读取一个字符.默认的标准输入流即stdio.h中定义的stdin.但是从输入流中读取字符时又<br>涉及到缓冲的问题,所以并不是在屏幕中敲上一个字符程序就会运行,一般是通过在屏幕上敲上回车键,然后将回车前的字符<br>串放在缓冲区中,getchar就是在缓冲区中一个一个的读字符.当然也可以在while循环中指定终止字符,如下面的语句:<br>while ((c &#x3D; getchar()) !&#x3D; ‘#’)这是以#来结束的.</p>
+<h2 id="putchar"><a href="#putchar" class="headerlink" title="putchar()"></a>putchar()</h2><p><code>int putchar(int ch)</code></p>
+<p>putchar(ch)主要是把字符ch写到标准流stdout中去.</p>
+<h2 id="gets"><a href="#gets" class="headerlink" title="gets()"></a>gets()</h2><p><code>char * gets(char *str)</code></p>
+<p>gets主要是从标准输入流读取字符串并回显，读到换行符时退出,并会将换行符省去.</p>
+<h2 id="puts"><a href="#puts" class="headerlink" title="puts()"></a>puts()</h2><p><code>int puts(char *str)</code></p>
+<p>puts主要是把字符串str写到标准流stdout中去,并会在输出到最后时添加一个换行符.</p>
+<h2 id="fgets"><a href="#fgets" class="headerlink" title="fgets()"></a>fgets()</h2><p><code>char *fgets(char *str, int num, FILE *fp)</code></p>
+<p>str是存放读入的字符数组指针,num是最大允许的读入字符数,fp是文件指针.fgets的功能是读一行字符，该行的字符数<br>不大于num-1.因为fgets函数会在末尾加上一个空字符以构成一个字符串.另外fgets在读取到换行符后不会将其省略.</p>
+<h2 id="fputs"><a href="#fputs" class="headerlink" title="fputs()"></a>fputs()</h2><p><code>int fputs(char *str, file *fp)</code></p>
+<p>fputs将str写入fp.fputs与puts的不同之处是fputs在打印时并不添加换行符.</p>
+<h2 id="fgetc"><a href="#fgetc" class="headerlink" title="fgetc()"></a>fgetc()</h2><p><code>int fgetc(FILE *fp)</code></p>
+<p>fgetc从fp的当前位置读取一个字符.</p>
+<h2 id="fputc"><a href="#fputc" class="headerlink" title="fputc()"></a>fputc()</h2><p><code>int fputc(int ch, file *fp)</code></p>
+<p>fputc是将ch写入fp当前指定位置.</p>
+<h2 id="fscanf"><a href="#fscanf" class="headerlink" title="fscanf()"></a>fscanf()</h2><p><code>int fscanf(FILE *fp, char *format,...)</code></p>
+<p>fscanf按照指定格式从文件中出读出数据,并赋值到参数列表中.</p>
+<h2 id="fprintf"><a href="#fprintf" class="headerlink" title="fprintf()"></a>fprintf()</h2><p><code>int fprintf(FILE *fp, char *format,...)</code></p>
+<p>fprintf将格式化数据写入流式文件中.</p>
+<h1 id="C-输入输常用函数（包含C）"><a href="#C-输入输常用函数（包含C）" class="headerlink" title="C++输入输常用函数（包含C）"></a>C++输入输常用函数（包含C）</h1><p>流（stream）或标准I&#x2F;O（　进程－＞fp－＞流（FILE+缓冲）－＞文件）（内存buf, 流fp）:</p>
+<p>每次输入一个字符：</p>
+<h2 id="getc-1"><a href="#getc-1" class="headerlink" title="getc();"></a>getc();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int getc(FILE *fp);</p>
+<p>成功：返回下一个字符；出错：返回EOF；文件尾：EOF；</p>
+<p>实现：内存　＜－读一个字符c－　流（由fp所指的流，是文件的逻辑代表）</p>
+<p>原因：在标准I&#x2F;O中用，将流看成文件的逻辑代表，将对进程－＞文件的操作，现转换为进程－＞流（也就是相当于文件）的操作。</p>
+<p>补充：函数在返回下一个字符时，会将其unsigned char类型转换为int类型。为不带符号的理由是，如果最高位是1也不会使返回值为负。要求整形返回值的理由是，这样就可以返回所有可能的字符值再加上一个已出错或已到达文件尾端的指示值。即字符值变为正的int值，负的值就是出错或是到达文件尾端。（负值表特殊意义），同时不论是出错还是到达文件尾端，这三个函数都返回同样的值即都是-1。由于每个流在FILE对象中维持了两个标志，即出错标志和文件结束标志，为了区分其不同，必须调用ferror或feof。</p>
+<h2 id="fgetc-1"><a href="#fgetc-1" class="headerlink" title="fgetc();"></a>fgetc();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int fgetc(FILE *fp);</p>
+<p>成功：返回下一个字符；出错：返回EOF；文件尾：EOF；</p>
+<p>实现：同getc</p>
+<p>原因：同getc</p>
+<p>补充：同getc</p>
+<h2 id="getchar-1"><a href="#getchar-1" class="headerlink" title="getchar();"></a>getchar();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int getchar(void);</p>
+<p>成功：返回下一个字符；出错：返回EOF；文件尾：EOF;</p>
+<p>实现：内存　＜－读一个字符c－　流（由stdin所指的流，是标准输入文件的逻辑代表），所以getchar&#x3D;getc(stdin);</p>
+<p>原因：同getc</p>
+<p>补充：同getc</p>
+<p>每次输入一行：</p>
+<h2 id="fgets-1"><a href="#fgets-1" class="headerlink" title="fgets();"></a>fgets();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>char *fgets(char *restrict buf,  Int n,  FILE *restrict  fp);</p>
+<p>成功：返回buf；出错：返回NULL; 文件结尾：NULL；</p>
+<p>实现：内存buf　＜－从fp所指的流中取一行字符－　流（由fp所指）</p>
+<p>原因：在标准I&#x2F;O中用，将流看成文件的逻辑代表，将对进程－＞文件的操作，现转换为进程－＞流（也就是相当于文件）的操作。</p>
+<p>补充：必须指定用户进程缓冲区的长度n，即buf的大小，此函数从流中一直读到下一个换行符为止，但是不超过n-1个字符，读入的字符被送入用户缓冲区buf中。该缓冲区以null字符结尾。如若该行包括最后换行符的字数大于n-1，则其只返回一个不完整的行，但是缓冲区buf总是以null字符结尾，对此函数的调用会继续读该行。缓冲区buf中的内容为：（字符+换行符）+null。所以字符+换行符＜＝n-1，因为一定要留一个NULL字符来标识缓冲区的结束；</p>
+<h2 id="gets-1"><a href="#gets-1" class="headerlink" title="gets();"></a>gets();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>char *gets(char * buf);</p>
+<p>成功：返回buf；出错：返回NULL; 文件结尾：NULL；</p>
+<p>实现：内存buf　＜－从stdin所指的流中取1行字符－标准输入流（由fp&#x3D;stdin所指）</p>
+<p>原因：同上；</p>
+<p>补充：不推荐使用，问题是调用者在使用gets时，不能指定缓冲区buf（用户进程）的长度，这样可能造成缓冲区溢出。</p>
+<p>每次输出一个字符：</p>
+<h2 id="putc-1"><a href="#putc-1" class="headerlink" title="putc();"></a>putc();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int putc(int c ,FILE *fp);</p>
+<p>成功：返回c；出错：返回EOF;</p>
+<p>实现：内存中整形变量c－写字符C－＞流（由fp所指）。至于流什么时候将C写入文件中，这个由库函数来实现，不用用户操心；</p>
+<h2 id="fputc-1"><a href="#fputc-1" class="headerlink" title="fputc();"></a>fputc();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int fputc(int c ,FILE *fp);</p>
+<p>成功：返回c；出错：返回EOF;</p>
+<p>实现：内存中整形变量c－写字符C－＞流（由fp所指）。至于流什么时候将C写入文件中，这个由库函数来实现，不用用户操心；</p>
+<h2 id="putchar-1"><a href="#putchar-1" class="headerlink" title="putchar();"></a>putchar();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int putchar(int c);</p>
+<p>成功：返回c；出错：返回EOF;</p>
+<p>实现：内存中整形变量c－写字符C－＞流（由fp&#x3D;stdout所指）。至于流什么时候将C写入标准输出文件中，这个由库函数来实现，不用用户操心；</p>
+<p>补充：putchar(c)&#x3D;putc(c,stdout);</p>
+<p>每次输出一行：</p>
+<h2 id="fputs-1"><a href="#fputs-1" class="headerlink" title="fputs();"></a>fputs();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int fputs(const char *restrict  str, FILE  *restrict  fp);</p>
+<p>成功：返回非负值；出错：返回EOF；</p>
+<p>实现：内存中字符数组str－写字符数组str－＞流（由fp所指）。</p>
+<p>补充：将一个以null符终止的字符串（相当于用户空间buf，肯定有null，对应于fgets的buf中一定要有个null来标识缓冲区buf的结束。）写到指定的流，尾端的终止符null不写进流中。注意，这并不一定是每次输出一行，因为它并不要求在null之前一定是换行符，buf中有就有，没有就没有，通常，在空字符之前是一个换行符，但并不要求总是如此。用户空间buf：字符（+换行符）+null；流中的buf：字符+换行符。</p>
+<h2 id="puts-；"><a href="#puts-；" class="headerlink" title="puts()；"></a>puts()；</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int puts(const char * str);</p>
+<p>成功：返回非负值；出错：返回EOF；</p>
+<p>实现：内存中字符数组str－写字符数组str－＞标准输出流（由fp＝stdout所指）。</p>
+<p>补充：将一个以null结尾的字符串写到标准输出上，相当于进程－＞流－＞标准输出文件。终止符不写出，但是puts然后又将一个换行符写到标准输出。应当少用，以免需要记住它在最后是否添加了一个换行符。而fgets和fputs在处理换行符，本着实事求是的态度，有就有，没有就没有，不会在用户buf和流缓冲以及文件中自己添加，只是在数据经过流缓冲时，增加或是过滤到null字符。当fgets时会在用户buf中增加一个null以标识用户buf的结束，而fputs时，以null为终止字符，但是尾端的null并不写在流中。</p>
+<p>二进制I&#x2F;O：</p>
+<h2 id="fread"><a href="#fread" class="headerlink" title="fread()"></a>fread()</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>ssize_t  fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict  fp);</p>
+<p>成功：读到的对象数。</p>
+<p>实现：内存始址ptr＜－读N个对象－　流（由fp所指）</p>
+<p>原因：以上有一次一个字符或是一次一行的方式进行I&#x2F;O操作，当我们读或写一个结构时，对于一次一个字符的方式，必须循环通过整个结构，每次循环处理一个字节，一次读或写一个字节，这会很烦。而对于一次一行的方式，当每次结构体中有null字符时，fputs就会停止，所以也不能用它实现读结构，同时fgets中包含有null字节或换行符，其也不能正常工作。所以要并实现结构体作为一个整体的读或写。</p>
+<p>补充：使用二进制的基本问题是：它只能用于读在同一系统上已写的数据。其原因是：在结构中，同一成员偏移量可能因为编译器和系统而异，另外，用来存储多字节整数和浮点值的二进制格式在不同的机器体系结构之间也可能不同。</p>
+<h2 id="fwrite"><a href="#fwrite" class="headerlink" title="fwrite()"></a>fwrite()</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>ssize_t  fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict  fp);</p>
+<p>成功：写的对象数。</p>
+<p>实现：内存始址ptr－写N个对象－＞　流（由fp所指）</p>
+<p>格式化输入：文件－流－＞格式转换－＞内存变量中</p>
+<h2 id="scanf-1"><a href="#scanf-1" class="headerlink" title="scanf();"></a>scanf();</h2><p><strong>格式</strong>：#include &lt;stdio.h&gt;</p>
+<p>int scanf(const char *restrict format,…)</p>
+<p><strong>成功</strong>：指定的输入项数；出错：返回EOF；输入出错或在任意变换前已到达文件结尾：EOF；</p>
+<p><strong>返回值</strong>：（详见CPrimerPlus P95）</p>
+<blockquote>
+<ol>
+<li>返回成功读取的项数</li>
+<li>如果没有读取任何项，如需要读取一个数字而用户却输入一个非数值字符串，scanf()返回0.</li>
+<li>当scanf()检测到“文件结尾”时，会返回EOF（EOF是字符串中的特殊值，通常手动用#define指令把它定义为-1）（在CPrimerPlus第六章中讨论文件结尾相关内容以及如何利用scanf()返回值，可以使用scanf()返回值检测和处理不匹配的输入）</li>
+</ol>
+</blockquote>
+<p><strong>实现</strong>：标准输入流－＞格式转换－＞内存变量中。用于分析输入字符串，并将字符序列转换成指定类型的变量。格式之后的各个参数包含了变量的地址，以用转换结果初始化这些变量。</p>
+<p><strong>原因</strong>：要在流中做格式转换，再将结果放到内存变量中</p>
+<p><strong>补充</strong>：（详见CPrimerPlus P95）</p>
+<blockquote>
+<ol>
+<li>如果使用%s转换说明，scanf()会读取除空白字符外的所有字符。scanf()跳过空白字符开始读取第一个非空白字符，并保存非空白字符直到遇到下以恶搞空白字符，这意味这%s转换说明只能读取不包含空白地府的字符串，scanf会在字符序列的末尾加上\0，让数组中的内容形成一个字符串。（空格符，制表符，换行符统称为空白字符）</li>
+<li>注意以%d为例，如果scanf()函数读取到非数字字符它会把非数字字符放回输入，这意味着程序在下一次读取输入时，首先读取到的是上一次读取丢失的非数字字符。</li>
+<li>C语言还可以使用其它的输入函数来处理一些特殊情况，如getchar()和fputs()。这两个函数更适合处理一些特殊情况，如读取单个字符或包含空格的字符串。</li>
+<li>除了%c，其它的转换说明都会自动跳过待输入值前面的空白。</li>
+</ol>
+</blockquote>
+<h2 id="fscanf-1"><a href="#fscanf-1" class="headerlink" title="fscanf();"></a>fscanf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int fscanf(FILE *restrict fp, const char *restrict format,…)</p>
+<p>成功：指定的输入项数；出错：返回EOF；输入出错或在任意变换前已到达文件结尾：EOF；</p>
+<p>实现：输入流－＞格式转换－＞内存变量中</p>
+<h2 id="sscanf"><a href="#sscanf" class="headerlink" title="sscanf();"></a>sscanf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int sscanf(const char *restrict buf, const char *restrict format,…)</p>
+<p>成功：指定的输入项数；出错：返回EOF；输入出错或在任意变换前已到达文件结尾：EOF；</p>
+<p>实现：内存buf－＞格式转换－＞内存变量中。</p>
+<p>补充：对于scanf(), 从标准输入流中输入；fscanf,从流中输入； sscanf，这个比较特殊，不是从流中输入，而是内存的一个buf相当于string中输入。</p>
+<h2 id="vscanf"><a href="#vscanf" class="headerlink" title="vscanf();"></a>vscanf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int vscanf(const char *restrict format, va_list  arg);</p>
+<p>成功：指定的输入项数；出错：返回EOF；输入出错或在任意变换前已到达文件结尾：EOF</p>
+<p>实现：标准输入流－＞格式转换－＞内存变量中。用于分析输入字符串，并将字符序列转换成指定类型的变量。格式之后的各个参数包含了变量的地址，以用转换结果初始化这些变量。同于scanf,只是将原来的可变参数…换成了arg;</p>
+<p>原因：要在流中做格式转换，再将结果放到内存变量中</p>
+<h2 id="vfscanf"><a href="#vfscanf" class="headerlink" title="vfscanf();"></a>vfscanf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int vfscanf(FILE *restrict fp, const char *restrict format, va_list  arg)</p>
+<p>成功：指定的输入项数；出错：返回EOF；输入出错或在任意变换前已到达文件结尾：EOF；</p>
+<p>实现：输入流－＞格式转换－＞内存变量中, 同于fscanf,只是将原来的可变参数…,换成了arg;</p>
+<h2 id="vsscanf"><a href="#vsscanf" class="headerlink" title="vsscanf();"></a>vsscanf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int vsscanf(const char *restrict buf, const char *restrict format, va_list  arg)</p>
+<p>成功：指定的输入项数；出错：返回EOF；输入出错或在任意变换前已到达文件结尾：EOF；</p>
+<p>实现：内存buf－＞格式转换－＞内存变量中。同于sscanf,只是将原来的可变参数…,换成了arg;</p>
+<p>补充：对于scanf(), 从标准输入流中输入；fscanf,从流中输入； sscanf，这个比较特殊，不是从流中输入，而是内存的一个buf相当于string中输入。</p>
+<p>格式化输出：文件－流＜－格式字符串＜－内存变量</p>
+<h2 id="printf-；"><a href="#printf-；" class="headerlink" title="printf()；"></a>printf()；</h2><p><strong>格式</strong>：#include &lt;stdio.h&gt;</p>
+<p>int  printf(const char *restrict format, …);</p>
+<p><strong>成功</strong>：返回输出字符数；出错：返回负值；</p>
+<p><strong>实现</strong>：标准输出流＜－格式字符串＜－内存变量</p>
+<p><strong>原因</strong>：要将内存变量的数据做格式变换，再将变换的结果放入流中</p>
+<h2 id="fprintf-1"><a href="#fprintf-1" class="headerlink" title="fprintf();"></a>fprintf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int  fprintf(FILE *restrict fp,const char *restrict format, …);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：文件－输出流＜－格式字符串＜－内存变量</p>
+<h2 id="sprint"><a href="#sprint" class="headerlink" title="sprint();"></a>sprint();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int  sprintf(char *restrict buf, const char *restrict format, …);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：内存字符串buf＜－格式字符串＜－内存变量,就是将格式化的字符串送入数组buf而不是指定的流中。在数组的尾端自动加一个null字节，但该字节不包括在返回值中。</p>
+<h2 id="snprintf"><a href="#snprintf" class="headerlink" title="snprintf();"></a>snprintf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p> int  snprintf(char *restrict buf, size_t n , const char *restrict format, …);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：内存字符串buf＜－格式字符串＜－内存变量,就是将格式化的字符串送入数组buf而不是指定的流中。在数组的尾端自动加一个null字节，但该字节不包括在返回值中。只能输入n-1个字符，超过的任何字条都会被丢弃。</p>
+<h2 id="vprintf"><a href="#vprintf" class="headerlink" title="vprintf();"></a>vprintf();</h2><p>格式：#include &lt;stdarg.h&gt;</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>int  vprintf(const char *restrict format, va_list  arg);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：标准输出流＜－格式字符串＜－内存变量,同于printf,只是将原来的可变参数…换成了arg;</p>
+<p>原因：要将内存变量的数据做格式变换，再将变换的结果放入流中</p>
+<h2 id="vfprintf"><a href="#vfprintf" class="headerlink" title="vfprintf();"></a>vfprintf();</h2><p>格式：#include &lt;stdarg.h&gt;</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>int  vfprintf(FILE *restrict fp,const char *restrict format, va_list  arg);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：输出流＜－格式字符串＜－内存变量,同于fprintf,只是将原来的可变参数…换成了arg;</p>
+<p>原因：要将内存变量的数据做格式变换，再将变换的结果放入流中</p>
+<h2 id="vsprintf"><a href="#vsprintf" class="headerlink" title="vsprintf();"></a>vsprintf();</h2><p>格式：#include &lt;stdarg.h&gt;</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>int  vsprintf(char *restrict buf, const char *restrict format, va_list  arg);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：内存数组buf＜－格式字符串＜－内存变量,同于sprintf,只是将原来的可变参数…换成了arg; 就是将格式化的字符串送入数组buf而不是指定的流中。在数组的尾端自动加一个null字节，但该字节不包括在返回值中。</p>
+<p>原因：要将内存变量的数据做格式变换，再将变换的结果放入流中</p>
+<h2 id="vsnprintf"><a href="#vsnprintf" class="headerlink" title="vsnprintf();"></a>vsnprintf();</h2><p>格式：#include &lt;stdio.h&gt;</p>
+<p>int  vsnprintf(char *restrict buf, size_t n , const char *restrict format, va_list arg);</p>
+<p>成功：返回输出字符数；出错：返回负值；</p>
+<p>实现：内存字符串buf＜－格式字符串＜－内存变量, 同于snprintf,只是将原来的可变参数…换成了arg; 就是将格式化的字符串送入数组buf而不是指定的流中。在数组的尾端自动加一个null字节，但该字节不包括在返回值中。只能输入n-1个字符，超过的任何字条都会被丢弃。</p>
+<h2 id="read"><a href="#read" class="headerlink" title="read()"></a>read()</h2><p>形式：#include&lt;unistd.h&gt;</p>
+<p>ssize_t  read (int filedes,  void *buf,  size_t  nbytes );</p>
+<p>成功：返回读到的字节数；出错：返回-1；文件尾：返回0；</p>
+<p>原因：基本系统调用功能；</p>
+<p>实现：文件（由filedes所指）－读nbytes字节－＞内存buf中。</p>
+<p>补充：有多种情况可使实际读到的字节数少于要求读的字节数：</p>
+<p>当从普通文件读时，在读到要求字节数之前已到达了文件尾端。</p>
+<p>当从终端设备读时，通常一次最多读一行。</p>
+<p>当从网络读时，网络中缓冲机构可能造成返回值小于所要求读的字节数。</p>
+<p>当从管道或FIFO读时，如若管道包含的字节少于所需的数量，那么只返回实际用的字节数。</p>
+<p>当从某些面向记录的设备读时，一次最多返回一个记录。</p>
+<p>当某一信号造成中断，而已经读了部分数据量时。</p>
+<p>读操作从文件的当前偏移量处开始，在成功返回之前，该偏移量将增加实际读到的字节数。常用的unix系统shell都提供一种方法，它在标准输入上打开一个文件，在标准输出上追寻或重写一个文件，这使得程序不必自行打开输入和输出文件。</p>
+<h2 id="write"><a href="#write" class="headerlink" title="write()"></a>write()</h2><p>形式：#include&lt;unistd.h&gt;</p>
+<p>ssize_t  write (int filedes,  const void *buf,  size_t  nbytes );</p>
+<p>成功：返回已写的字节数；出错：返回-1；</p>
+<p>原因：基本系统调用功能；</p>
+<p>实现：文件（由filedes所指）＜－写nbytes字节－内存buf中。</p>
+<p>补充：write出错的一个常见的原因是：磁盘已写满，或者超过了一个给定进程的文件长度限制。对于普通文件，写操作从文件的当前偏移量处开始。如果在打开该文件时，指定了O＿APPEND选项，则在每次写操作之前，将文件偏移量设置在文件的当前结尾处。在一次成功写之后，该文件偏移量增加实际写的字节数。</p>
+<h2 id="pread"><a href="#pread" class="headerlink" title="pread()"></a>pread()</h2><p>形式：#include&lt;unistd.h&gt;</p>
+<p>ssize_t  pread (int filedes,   void *buf,  size_t  nbytes,  off_t  offset );</p>
+<p>成功：返回读到的字节数；出错：返回-1；到文件结尾：返回0</p>
+<p>原因：由于lseek和read 调用之间，内核可能会临时挂起进程，所以对同步问题造成了问题，调用pread相当于顺序调用了lseek 和　read，这两个操作相当于一个捆绑的原子操作。</p>
+<p>实现：文件（由filedes所指）－读nbytes字节－＞内存buf中。</p>
+<p>补充：调用pread时，无法中断其定位和读操作，另外不更新文件指针。</p>
+<h2 id="pwrite"><a href="#pwrite" class="headerlink" title="pwrite()"></a>pwrite()</h2><p>形式：#include&lt;unistd.h&gt;</p>
+<p>ssize_t  pwrite (int filedes,   const void *buf,  size_t  nbytes,  off_t  offset );</p>
+<p>成功：返回已写的字节数；出错：返回-1；</p>
+<p>原因：由于lseek和write 调用之间，内核可能会临时挂起进程，所以对同步问题造成了问题，调用pwrite相当于顺序调用了lseek 和　write，这两个操作相当于一个捆绑的原子操作。</p>
+<p>实现：文件（由filedes所指）＜－写nbytes字节－内存buf中。</p>
+<p>补充：调用pwrite时，无法中断其定位和读操作，另外不更新文件指针。</p>
+<h2 id="readv"><a href="#readv" class="headerlink" title="readv()"></a>readv()</h2><p>格式：#include &lt;sys&#x2F;uio.h&gt;</p>
+<p>ssize_t  readv(int filedes, const  struct iovec *iov, int iovcnt);</p>
+<p>成功：返回已读的字节数；出错：返回-1；</p>
+<p>实现：文件（fd）－＞内存向量中</p>
+<p>原因：在一次函数调用中读、写多个非连续缓冲区，但是这些缓冲区已经用iovec表示好了。减少了系统调用的次数。</p>
+<h2 id="writev"><a href="#writev" class="headerlink" title="writev()"></a>writev()</h2><p>格式：#include &lt;sys&#x2F;uio.h&gt;</p>
+<p>ssize_t  writev(int filedes, const  struct iovec *iov, int iovcnt);</p>
+<p>成功：返回已读的字节数；出错：返回-1；</p>
+<p>实现：文件（fd）&lt;－内存向量</p>
+<p>原因：在一次函数调用中读、写多个非连续缓冲区，但是这些缓冲区已经用iovec表示好了。减少了系统调用的次数。</p>
+<h2 id="readn"><a href="#readn" class="headerlink" title="readn()"></a>readn()</h2><p>格式：#include &lt;sys&#x2F;uio.h&gt;</p>
+<p>ssize_t  readn(int filedes, void *bug, size_t  nbytes);</p>
+<p>成功：返回已读的字节数；出错：返回-1；</p>
+<p>实现：文件（fd）－＞内存buf中</p>
+<p>原因：管道、FIFO以及某些设备，特别是终端、网络和STREAMS设备有下列两种性质：一是，一次read操作所返回的数据可能少于所要求的数据，即使还没达到文件尾端也可能是这样的。这不是一个错误，应当继续读该设备。二是，一次write操作所返回的值也可能少于所指定输出的字节数，这可能是由若干因素造成的。这些也不是错误，也应当继续写余下的数据至该设备。通常只对非阻塞描述符，或捕捉到一个信号时，才发生这种write的中途返回。但是在读写磁盘时，很少遇到这样的情况。所以这个函数其实是按需要多次调用read 和write直至读、写了N个字节数据，即我们称之为：直到集齐了再返回。</p>
+<h2 id="written"><a href="#written" class="headerlink" title="written()"></a>written()</h2><p>格式：#include &lt;sys&#x2F;uio.h&gt;</p>
+<p>ssize_t  writen(int filedes, void *bug, size_t  nbytes);</p>
+<p>成功：返回已读的字节数；出错：返回-1；</p>
+<p>实现：文件（fd）&lt;－内存buf中</p>
+<p>原因：管道、FIFO以及某些设备，特别是终端、网络和STREAMS设备有下列两种性质：一是，一次read操作所返回的数据可能少于所要求的数据，即使还没达到文件尾端也可能是这样的。这不是一个错误，应当继续读该设备。二是，一次write操作所返回的值也可能少于所指定输出的字节数，这可能是由若干因素造成的。这些也不是错误，也应当继续写余下的数据至该设备。通常只对非阻塞描述符，或捕捉到一个信号时，才发生这种write的中途返回。但是在读写磁盘时，很少遇到这样的情况。所以这个函数其实是按需要多次调用read 和write直至读、写了N个字节数据，即我们称之为：直到集齐了再返回。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://ctrlx.life">CtrlX</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://ctrlx.life/post/f63e76e8.html">http://ctrlx.life/post/f63e76e8.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ctrlx.life" target="_blank">CtrlCherry</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付寶"/></a><div class="post-qr-code-desc">支付寶</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/df681ed9.html"><img class="prev-cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.4b19205h5b00.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CPP系统调用 | printf</div></div></a></div><div class="next-post pull-right"><a href="/post/73acccd.html"><img class="next-cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1r3z3dmvv7i8.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C语言printf()/scanf()的转换说明和转换说明修饰符</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/fe9385a0.html" title="01-C语言进阶篇与常见面试题笔记"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy13.3npug80s4ii0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-28</div><div class="title">01-C语言进阶篇与常见面试题笔记</div></div></a></div><div><a href="/post/868c7499.html" title="C Primer Plus代码实践笔记"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2cm00h39pc00.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-30</div><div class="title">C Primer Plus代码实践笔记</div></div></a></div><div><a href="/post/a5ee83d3.html" title="C语言结构体字节对齐 | 结构体与联合"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy17.h3bfzw39nww.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-03</div><div class="title">C语言结构体字节对齐 | 结构体与联合</div></div></a></div><div><a href="/post/5f6de10f.html" title="C语言strcpy(),memcpy(),memmove() | 数组赋值给数组"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy16.5u4m11w9vek0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-03</div><div class="title">C语言strcpy(),memcpy(),memmove() | 数组赋值给数组</div></div></a></div><div><a href="/post/728fe936.html" title="C语言常用的字符串函数及案例"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy15.4zruwinwo6c0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-03</div><div class="title">C语言常用的字符串函数及案例</div></div></a></div><div><a href="/post/7977ead.html" title="C语言逗号运算符(,)"><img class="cover" src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/jy13.3npug80s4ii0.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-04</div><div class="title">C语言逗号运算符(,)</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">CtrlX</div><div class="author-info__description">Inevitable、Optional</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">105</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://code.ctrlx.life/"><i class="fa-solid fa-code"></i><span>Code index</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-45-30-782_com.3xz33a701f40.webp" target="_blank" title=""><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-46-06-610_com.641chq4g7ps0.webp" target="_blank" title=""><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-39-29-222_com.5q7wnairykc0.webp" target="_blank" title=""><i class="fa-brands fa-instagram"></i></a><a class="social-icon" href="https://steamcommunity.com/profiles/76561199113999370/" target="_blank" title=""><i class="fa-brands fa-steam"></i></a><a class="social-icon" href="https://twitter.com/GitCtrlX?t=h1TjUUcsWmdL0EnxVaALxg&amp;s=09" target="_blank" title=""><i class="fa-brands fa-twitter"></i></a><a class="social-icon" href="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/hexoBlogCtrlCherry/Screenshot_2022-07-30-09-52-36-955_org.4e0vey1njrm0.webp" target="_blank" title=""><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">18：00-次日6：00开启夜间模式 <p align="center">为何中意我这种无赖，是话你太蠢还是太伟大</p></div></div><div class="xpand" style="height:10px;"></div><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople1.js"></script><script src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/zdog.dist.js"></script><script id="rendered-js" src="https://fastly.jsdelivr.net/gh/xiaopengand/blogCdn@latest/xzxr/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget"><div class="item-headline"><i class="fa-solid fa-broom-ball"></i><span>这是个牌子</span></div><div class="item-content"><marquee><b>People who can't give up nothing can't change anything.</b></marquee></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86I-x2F-O%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">C语言常用标准I&#x2F;O函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf"><span class="toc-number">1.1.</span> <span class="toc-text">scanf()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf"><span class="toc-number">1.2.</span> <span class="toc-text">printf()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getc"><span class="toc-number">1.3.</span> <span class="toc-text">getc()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#putc"><span class="toc-number">1.4.</span> <span class="toc-text">putc()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getchar"><span class="toc-number">1.5.</span> <span class="toc-text">getchar()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#putchar"><span class="toc-number">1.6.</span> <span class="toc-text">putchar()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gets"><span class="toc-number">1.7.</span> <span class="toc-text">gets()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#puts"><span class="toc-number">1.8.</span> <span class="toc-text">puts()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fgets"><span class="toc-number">1.9.</span> <span class="toc-text">fgets()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fputs"><span class="toc-number">1.10.</span> <span class="toc-text">fputs()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fgetc"><span class="toc-number">1.11.</span> <span class="toc-text">fgetc()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fputc"><span class="toc-number">1.12.</span> <span class="toc-text">fputc()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fscanf"><span class="toc-number">1.13.</span> <span class="toc-text">fscanf()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fprintf"><span class="toc-number">1.14.</span> <span class="toc-text">fprintf()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E8%BE%93%E5%85%A5%E8%BE%93%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%EF%BC%88%E5%8C%85%E5%90%ABC%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">C++输入输常用函数（包含C）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#getc-1"><span class="toc-number">2.1.</span> <span class="toc-text">getc();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fgetc-1"><span class="toc-number">2.2.</span> <span class="toc-text">fgetc();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getchar-1"><span class="toc-number">2.3.</span> <span class="toc-text">getchar();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fgets-1"><span class="toc-number">2.4.</span> <span class="toc-text">fgets();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gets-1"><span class="toc-number">2.5.</span> <span class="toc-text">gets();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#putc-1"><span class="toc-number">2.6.</span> <span class="toc-text">putc();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fputc-1"><span class="toc-number">2.7.</span> <span class="toc-text">fputc();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#putchar-1"><span class="toc-number">2.8.</span> <span class="toc-text">putchar();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fputs-1"><span class="toc-number">2.9.</span> <span class="toc-text">fputs();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#puts-%EF%BC%9B"><span class="toc-number">2.10.</span> <span class="toc-text">puts()；</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fread"><span class="toc-number">2.11.</span> <span class="toc-text">fread()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fwrite"><span class="toc-number">2.12.</span> <span class="toc-text">fwrite()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf-1"><span class="toc-number">2.13.</span> <span class="toc-text">scanf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fscanf-1"><span class="toc-number">2.14.</span> <span class="toc-text">fscanf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sscanf"><span class="toc-number">2.15.</span> <span class="toc-text">sscanf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscanf"><span class="toc-number">2.16.</span> <span class="toc-text">vscanf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vfscanf"><span class="toc-number">2.17.</span> <span class="toc-text">vfscanf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsscanf"><span class="toc-number">2.18.</span> <span class="toc-text">vsscanf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf-%EF%BC%9B"><span class="toc-number">2.19.</span> <span class="toc-text">printf()；</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fprintf-1"><span class="toc-number">2.20.</span> <span class="toc-text">fprintf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sprint"><span class="toc-number">2.21.</span> <span class="toc-text">sprint();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#snprintf"><span class="toc-number">2.22.</span> <span class="toc-text">snprintf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vprintf"><span class="toc-number">2.23.</span> <span class="toc-text">vprintf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vfprintf"><span class="toc-number">2.24.</span> <span class="toc-text">vfprintf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsprintf"><span class="toc-number">2.25.</span> <span class="toc-text">vsprintf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsnprintf"><span class="toc-number">2.26.</span> <span class="toc-text">vsnprintf();</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#read"><span class="toc-number">2.27.</span> <span class="toc-text">read()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#write"><span class="toc-number">2.28.</span> <span class="toc-text">write()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pread"><span class="toc-number">2.29.</span> <span class="toc-text">pread()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwrite"><span class="toc-number">2.30.</span> <span class="toc-text">pwrite()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#readv"><span class="toc-number">2.31.</span> <span class="toc-text">readv()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#writev"><span class="toc-number">2.32.</span> <span class="toc-text">writev()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#readn"><span class="toc-number">2.33.</span> <span class="toc-text">readn()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#written"><span class="toc-number">2.34.</span> <span class="toc-text">written()</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/297a89d9.html" title="Python学习笔记"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1ieyh98xguio.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python学习笔记"/></a><div class="content"><a class="title" href="/post/297a89d9.html" title="Python学习笔记">Python学习笔记</a><time datetime="2022-12-06T02:57:13.000Z" title="发表于 2022-12-06 10:57:13">2022-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/74a5716f.html" title="计算机网络笔记合集"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.426faxi87uw0.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络笔记合集"/></a><div class="content"><a class="title" href="/post/74a5716f.html" title="计算机网络笔记合集">计算机网络笔记合集</a><time datetime="2022-12-04T02:57:57.000Z" title="发表于 2022-12-04 10:57:57">2022-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/17aafb82.html" title="Java与CPP的部分语法对比"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2o9njislmhw0.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java与CPP的部分语法对比"/></a><div class="content"><a class="title" href="/post/17aafb82.html" title="Java与CPP的部分语法对比">Java与CPP的部分语法对比</a><time datetime="2022-11-28T09:43:59.000Z" title="发表于 2022-11-28 17:43:59">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/81d713b6.html" title="Java/C++强制类型转化 | 自增自减运算符 对比"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.25awkajrwnxc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java/C++强制类型转化 | 自增自减运算符 对比"/></a><div class="content"><a class="title" href="/post/81d713b6.html" title="Java/C++强制类型转化 | 自增自减运算符 对比">Java/C++强制类型转化 | 自增自减运算符 对比</a><time datetime="2022-11-27T08:02:27.000Z" title="发表于 2022-11-27 16:02:27">2022-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a9b5bacb.html" title="Git-diff用法总结"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.l9rr5rs8l40.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git-diff用法总结"/></a><div class="content"><a class="title" href="/post/a9b5bacb.html" title="Git-diff用法总结">Git-diff用法总结</a><time datetime="2022-11-23T09:45:01.000Z" title="发表于 2022-11-23 17:45:01">2022-11-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By CtrlX</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.ctrlx.life',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.ctrlx.life',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.ctrlx.life',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="5183531430" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="255,192,203" opacity="0.9" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="//code.tidio.co/nwxefknyxvcions2yjh87dvfbm4i2qza.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Programming/CPP/DQuestion/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 Daily Code<br>(3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Programming/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 Programming<br>(81)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Programming/CPP/Project/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 CPP Project<br>(11)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://ctrlx.life/categories/Algorithm/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐱‍👓 Algorithm<br>(5)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="http://ctrlx.life/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(25% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style> <script data-pjax>if(document.getElementById('recent-posts') && location.pathname =='/'){
+    
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.69f0xe5xpzg0.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-07-30</span><a class="blog-slider__title" href="post/7af7302a.html">关于解决Hexo上传时出现errorSpawn错误的详细说明</a><div class="blog-slider__text">暴力解决errorSpawn！</div><a class="blog-slider__button" href="post/7af7302a.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.426faxi87uw0.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.426faxi87uw0.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-09-25</span><a class="blog-slider__title" href="post/f254dc1d.html">C/CPP 指针变量 | 数组指针 | 指针数组 | 野指针 | 空指针</a><div class="blog-slider__text">C语言指针问题！</div><a class="blog-slider__button" href="post/f254dc1d.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.65267p6y15c0.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.65267p6y15c0.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-10-01</span><a class="blog-slider__title" href="post/c9703b4.html">C/CPP数组的深入理解 | 指针与数组 | 一二三维数组</a><div class="blog-slider__text">二维数组的行地址、列地址，与元素的存储详细分析！</div><a class="blog-slider__button" href="post/c9703b4.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1uj92a8f4nvk.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.1uj92a8f4nvk.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-10-01</span><a class="blog-slider__title" href="post/107469e8.html">C/CPP结构中的字符数组和字符指针</a><div class="blog-slider__text">char[] 与 char*！</div><a class="blog-slider__button" href="post/107469e8.html">详情</a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms"><div class="blog-slider__img"><img src="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2ejm4a942h7o.webp" alt="https://cdn.staticaly.com/gh/1438802682/image-hosting@master/BG/image.2ejm4a942h7o.webp"/></div><div class="blog-slider__content"><span class="blog-slider__code">2022-07-31</span><a class="blog-slider__title" href="post/3613e636.html">C++内存分区模型分析与实例以及扩展</a><div class="blog-slider__text">C++ 内存分区知识！</div><a class="blog-slider__button" href="post/3613e636.html">详情</a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载swiper')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script>
+<script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper/swiper/swiper.min.js"></script>
+<script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-swiper@0.18/swiper/swiperindex.js"></script>
+<style></style>
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://gitcalendar.zfe.space/api?1438802682";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="1438802682";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><script data-pjax>function history_calendar_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-history"><div class="card-content"><div class="item-headline"><i class="fas fa-clock fa-spin"></i><span>那年今日</span></div><div id="history-baidu" style="height: 100px;overflow: hidden"><div class="history_swiper-container" id="history-container" style="width: 100%;height: 100%"><div class="swiper-wrapper" id="history_container_wrapper" style="height:20px"></div></div></div></div>';
+                console.log('已挂载history_calendar')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='/'|| '/' ==='all')){
+
+            history_calendar_injector_config()
+        } </script><script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-card-history/baiduhistory/js/main.js"></script><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
